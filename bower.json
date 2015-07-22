@@ -1,0 +1,23 @@
+{
+  "name": "BsfwtWeb-front",
+  "version": "2.0",
+  "authors": [
+    "shitao",
+    "pzf"
+  ],
+  "description": "The Web Front Project for Bsfwt",
+  "main": "app/index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "appPath": "app",
+  "dependencies": {
+    "jquery": "1.10.0",
+    "underscore": "1.8.0",
+    "backbone": "1.2.0",
+    "handlebars":"3.0.3"
+  }
+}

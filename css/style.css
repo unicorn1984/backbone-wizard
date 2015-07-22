@@ -1,0 +1,63 @@
+.clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.step-header{
+    padding: 15px;border-bottom: 1px solid #E5E5E5;font-family: 'Open Sans';font-size: 13px;color: #393939;line-height: 1.5;background:#fff;
+}
+.step-footer{
+    background-color:#F8F8F8;border-top:1px solid #E4E9EE;line-height: 19.5px;margin-top: 0;padding:12px 20px  14px 20px;
+}
+.step-content{display:none;padding:0;background:#fff;width:95%;margin:15px auto;padding:5px}
+
+
+.wizard-steps  {display:block;background:url( images/step1.png) top center no-repeat;list-style-type:none;margin:0;padding:0;float:left;}
+.wizard-steps  span{display:block;clear:both;text-align:center;padding:0 20px;font-size:14px;}
+.wizard-steps  .step{padding:15px 0;}
+.wizard-steps  .ok{padding:15px 0;background:url( images/ok.gif) center center no-repeat;color:#87BA21;}
+
+
+.wizard-steps.stepend{background:url( images/step_r_1.png) top center no-repeat;}
+.wizard-steps.stepend.stepsover{background:url( images/step_r_2.png) top center no-repeat;}
+.wizard-steps .ok{display:none;}
+.wizard-steps.stepsover .ok{display:block;content:""}
+.wizard-steps.stepsover .step{display:none;}
+.wizard-steps.stepsover.current .ok{display:none;}
+.wizard-steps.stepsover.current .step{display:block;}
+
+.wizard-steps.stepsover{background:url( images/step2.png) top center no-repeat;}
+.wizard-steps.stepstart{background:url( images/step_l_1.png) top center no-repeat;}
+.wizard-steps.stepsover.stepstart{background:url( images/step_l_2.png) top center no-repeat;}
+
+.step-footer .btn {
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.step-footer .btn.btn-primary {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+}
+
+.step-footer .btn.btn-success {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+}
