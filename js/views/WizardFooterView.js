@@ -1,6 +1,6 @@
 Wizard.WizardFooterView = Backbone.View.extend({
 
-
+    el:".step-footer",
     template: Wizard['wizard-footer'],
 
 
@@ -29,6 +29,9 @@ Wizard.WizardFooterView = Backbone.View.extend({
         else if ($(e.target).hasClass("endbtn")){
              this.endClick();
         }
+        else if ($(e.target).hasClass("cancelbtn")){
+            this.cancelClick();
+        }
     },
     startClick: function (e) {
         this.parent.start();
@@ -40,37 +43,38 @@ Wizard.WizardFooterView = Backbone.View.extend({
         this.parent.previousStep();
     },
     endClick: function (e) {
-       // this.parent.previousStep();
+        this.parent.completeFn();
+    },
+    cancelClick:function(e){
+        this.parent.cancelFn();
     },
     /**
      * 让 上一步 下一步 完成 按钮可用
      */
 
     update:function(){
-        var currentStep = this.parent.getCurrentStep();
-        if(currentStep) {
-            this.$(".startbtn").hide();
-            if(currentStep.index===0||currentStep.index === this.parent.steps.length-1) {
-                if (currentStep.index === 0) {
-                    this.$(".nextbtn").show();
-                    this.$(".previousbtn").hide();
-                }
-                if (currentStep.index === this.parent.steps.length - 1) {
-                    this.$(".previousbtn").show();
-                    this.$(".nextbtn").hide();
-                    this.$(".endbtn").show();
-                }
+        if(this.parent.stepsView.isStart()&&!this.parent.stepsView.isEnd()){   //这样才能保证是进行中的状态
+            //如果是第一步，上一步按钮disable
+            if(this.parent.stepsView.isFirst()){
+                this.$(".previousbtn").hide();
             }else{
-                this.$(".nextbtn").show();
                 this.$(".previousbtn").show();
             }
-
-        }else{
-            this.$(".startbtn").show();
-            this.$(".previousbtn").hide();
-            this.$(".nextbtn").hide();
-            this.$(".endbtn").hide();
+            this.$(".nextbtn").show();
+            this.$(".startbtn").hide();
         }
+        else if(this.parent.stepsView.isEnd()){   //结束了
+            this.$(".previousbtn").hide();
+            this.$(".startbtn").hide();
+            this.$(".nextbtn").hide();
+            this.$(".endbtn").show();
+            this.$(".cancelbtn").hide();
+        }
+        else if(!this.parent.stepsView.isStart()){  //未开始
+            this.$(".startbtn").show();
+        }
+
+
 
     }
 

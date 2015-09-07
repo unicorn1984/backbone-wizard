@@ -78,6 +78,12 @@ module.exports = function (grunt) {
                         ]
                     }
                 ]
+            },
+            releaseJs: {
+                cwd: '<%=dist%>',
+                expand: true,
+                src: [ '**' ],
+                dest: 'F:/webwork/BsfwtWeb-front/bower_components/ns-backbone-wizard'
             }
         },
         uglify: {
@@ -104,8 +110,9 @@ module.exports = function (grunt) {
         'clean:dist',
         'handlebars',
         'concat',
-        'copy',
-        'uglify'
+        'copy:css',
+        'uglify',
+        'copy:releaseJs'
     ]);
 
 };

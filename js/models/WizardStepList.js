@@ -8,6 +8,10 @@ Wizard.WizardStepList = Backbone.Collection.extend({
 
     current: null,
 
+    _isStart: false,
+
+    _isEnd: false,
+
     addOne: function (item) {
         var newModel = new Wizard.WizardStep();
         newModel.set("step", item.step);
@@ -32,31 +36,58 @@ Wizard.WizardStepList = Backbone.Collection.extend({
     noOk: function (stepItem) {
         stepItem.set('ok', false);
     },
+    stepIsEnd: function (step) {
+        if (step.get('index') === this.length - 1)
+            return true;
+        return false;
+    },
+    isEnd: function () {
+        return this._isEnd;
+    },
+    isStart: function () {
+        return this._isStart;
+    },
+    isFirst:function(){
+        return this.current.get('index') === 0;
+    },
     start: function () {
         var start = this.at(0);
         this.currentStep(start);
         this.current = start;
+        this._isStart = true;
     },
+
     end: function () {
-        var end = this.at(this.length);
-        this.currentStep(end);
+        var end = this.at(this.length - 1);
+        this.ok(end);
         this.current = end;
+        this._isEnd = true;
+    },
+    endStep: function (step) {
+        step.set('ok', true);
+        this._isEnd = true;
     },
     nextStep: function () {
+        if (!this.isStart())
+            return;
         var sf = this;
 
-        if (sf.current.stepend) return;
+        if (sf.current.get('stepend')) return;
         else {
             sf.ok(sf.current);
             sf.noCurrentStep(sf.current);
             var next = sf.at(sf.current.get('index') + 1);
             sf.currentStep(next);
             sf.current = next;
+            if (this.stepIsEnd(next)) {
+                this.endStep(next);
+            }
         }
 
 
     },
     previousStep: function () {
+        if (this.isEnd()) return;
         var sf = this;
         if (sf.current.stepstart) return;
         else {

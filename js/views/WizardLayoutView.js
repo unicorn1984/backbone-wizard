@@ -9,20 +9,26 @@ Wizard.WizardLayoutView = Backbone.View.extend({
 
     initialize: function (arg) {
         this.steps = arg.steps;
+        this.cancelFn = arg.cancelFn;
+        this.completeFn = arg.completeFn;
         this.stepsView = new Wizard.WizardStepsView({steps: this.steps});
         this.stepsView.parent = this;
-        this.footerView = new Wizard.WizardFooterView();
-        this.footerView.parent = this;
+
         this._initView();
 
     },
 
     render: function () {
         this.$el.html(this.template({}));
+        this.footerView = new Wizard.WizardFooterView();
+        this.footerView.parent = this;
+        this.footerView.render();
         this.$el.find(".step-header").html(this.stepsView.$el);
-        this.$el.find(".step-footer").html(this.footerView.render().$el);
-
+        this.fixHeight();
         return this;
+    },
+    fixHeight: function () {
+        this.$('.wizard-content').height(this.$el.height() - this.$el.find(".step-header").innerHeight() - this.$el.find(".step-footer").innerHeight() - 2)
     },
     addView: function (index, viewName) {
         this.views.push({index: index, view: viewName});
@@ -80,10 +86,14 @@ Wizard.WizardLayoutView = Backbone.View.extend({
             viewObj.doComplete();
             this.currentView = viewObj;
         } else {
-            if (!previous && !this.currentView.doValidate())
-                return false;
-            if (!this.currentView.doBeforeLeave())
-                return false;   //返回false则不往下执行
+            if (previous) {
+                if (!this.currentView.doBeforePrevious())
+                    return false;   //返回false则不往下执行
+            } else {
+                if (!this.currentView.doBeforeNext())
+                    return false;   //返回false则不往下执行
+            }
+
             this.currentView.doDestroy();
             //获取view实例
             var viewObj = this.instructView(step);
@@ -118,10 +128,9 @@ Wizard.WizardLayoutView = Backbone.View.extend({
         //视图
         var result = this.activeView(nextStep);
         if (!result) return false;   //返回false则不往下执行
-        //路由（暂不提供）
-        // this._showPager(nextStep);
 
         this.stepsView.nextStep();
+
         //按钮
         this.footerView.update();
     },

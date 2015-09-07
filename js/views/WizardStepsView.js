@@ -38,6 +38,13 @@ Wizard.WizardStepsView = Backbone.View.extend({
     previousStep:function(){
         this.stepList.previousStep();
     },
+    end:function(){
+        this.stepList.end();
+    },
+    /**
+     * 返回正常的object类，而非backboneModel,backboneModel只能在此类内部使用，对外不暴露
+     * @returns {*}
+     */
     getCurrentStep:function(){
         var current = this.stepList.current;
         if(!current) return null;
@@ -48,6 +55,15 @@ Wizard.WizardStepsView = Backbone.View.extend({
                 returnvalue = item;
         })
         return returnvalue
+    },
+    isEnd: function () {
+        return this.stepList.isEnd();
+    },
+    isStart: function () {
+        return this.stepList.isStart();
+    },
+    isFirst:function(){
+       return this.stepList.isFirst();
     }
 
 });

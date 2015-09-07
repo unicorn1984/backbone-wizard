@@ -10,11 +10,16 @@
     padding: 15px;border-bottom: 1px solid #E5E5E5;font-family: 'Open Sans';font-size: 13px;color: #393939;line-height: 1.5;background:#fff;
 }
 .step-footer{
-    background-color:#F8F8F8;border-top:1px solid #E4E9EE;line-height: 19.5px;margin-top: 0;padding:12px 20px  14px 20px;
+    background-color:#F8F8F8;border-top:1px solid #E4E9EE;line-height: 19.5px;margin-top: 0;padding:12px 20px  5px 20px;
+    position: relative;
+    overflow: hidden;
+    height: 40px;
 }
 .step-content{display:none;padding:0;background:#fff;width:95%;margin:15px auto;padding:5px}
 
-
+.wizard-warpper{
+    height: 100%;
+}
 .wizard-steps  {display:block;background:url( images/step1.png) top center no-repeat;list-style-type:none;margin:0;padding:0;float:left;}
 .wizard-steps  span{display:block;clear:both;text-align:center;padding:0 20px;font-size:14px;}
 .wizard-steps  .step{padding:15px 0;}
@@ -33,6 +38,9 @@
 .wizard-steps.stepstart{background:url( images/step_l_1.png) top center no-repeat;}
 .wizard-steps.stepsover.stepstart{background:url( images/step_l_2.png) top center no-repeat;}
 
+.wizard-content{
+   overflow: auto;
+}
 .step-footer .btn {
     -moz-user-select: none;
     background-image: none;
@@ -60,4 +68,20 @@
     background-color: #5cb85c;
     border-color: #4cae4c;
     color: #fff;
+}
+
+.step-footer .btn.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.step-footer .leftbuttons {
+    position: absolute;
+    width: 100px;
+
+}
+.step-footer .rightbuttons {
+    width: 200px;
+    position:absolute;
+    right: 20px;
 }

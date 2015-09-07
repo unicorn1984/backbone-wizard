@@ -1,7 +1,7 @@
 this["Wizard"] = this["Wizard"] || {};
 
 this["Wizard"]["wizard-footer"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<button  type=\"button\" class=\"btn btn-success startbtn\">开始</button>\r\n<button type=\"button\" class=\"btn btn-primary previousbtn\" style=\"display:none\">上一步</button>\r\n<button type=\"button\" class=\"btn btn-primary nextbtn\" style=\"display:none\">下一步</button>\r\n<button  type=\"button\" class=\"btn btn-success endbtn\" style=\"display:none\">完结</button>\r\n";
+    return "<div class=\"leftbuttons\">\r\n    <button type=\"button\" class=\"btn btn-danger cancelbtn\">\r\n        &lt; 取消&nbsp;\r\n    </button>\r\n</div>\r\n<div class=\"rightbuttons\">\r\n    <button type=\"button\" class=\"btn btn-success startbtn\" style=\"display:none\"> &nbsp;开始 &gt;</button>\r\n        <button type=\"button\" class=\"btn btn-primary previousbtn\" style=\"display:none\">\r\n            &lt; 上一步&nbsp;\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary nextbtn\" style=\"display:none\"> &nbsp;下一步 &gt;</button>&nbsp;&nbsp;\r\n        <button type=\"button\" class=\"btn btn-success endbtn\" style=\"display:none\"> &nbsp;完结 &gt;</button>\r\n</div>\r\n";
 },"useData":true});
 
 this["Wizard"]["wizard-layout"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {

@@ -25,7 +25,9 @@ Wizard.WizardStepItemView = Backbone.View.extend({
         else if (model.get('stepend'))
             str += ' stepend';
 
-        if (model.get("current"))
+        if (model.get("current")&&model.get("ok"))   //完成状态，即是current又是ok
+            str += ' stepsover';
+        else if (model.get("current"))
             str += ' stepsover current';
         else if (model.get("ok"))
             str += ' stepsover';
